@@ -1,0 +1,160 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Feb  4 12:38:46 2020
+
+@author: kathryn haglich
+"""
+##### QUESTION 1 #####
+
+#### a [1,...,20]
+a = list(range(1, 21))
+print(a)
+
+#### b [20,...,1]
+b = a.copy()
+b.reverse()
+print(b)
+
+#### c [1,...,19,20,19,...1]
+c1 = a.copy()
+c2 = b.copy()
+c1.pop()
+c = c1+c2
+print(c)
+
+#alternative solution: c = a[:-1]+b
+
+#### d [4,3,6,...,4,3,6] where there are 10 occurrences of 4
+d = 10*[4,3,6] 
+print(d)
+
+#### e [4,3,6,...,4,3,6,4] where there are 11 occurences of 4, 10 occurrences of
+e = d + [4]
+print(e)
+
+##### QUESTION 2 #####
+from math import *
+
+# Long Inefficient Way 
+x = range(30, 61)
+
+#function that divides an input by 10 to get decimal form 
+def divideByTen(x):
+    return x/10.0
+#function that does the desired calculation 
+def mathy(x):
+    return exp(x)*cos(x)
+
+# Efficient Way with map (like apply in r)
+#divides each element of x by 10 
+r = list(map(divideByTen, x))
+#inputs each element of r into the calculation 
+answers = list(map(mathy, x))
+print(answers)
+
+
+
+
+##### QUESTION 3 #####
+#gets the numbers that are going to be used for exponent and denominator
+w = range(1,26)
+
+#does the calculaton 
+def makeFraction(x):
+    numerator = 2**x
+    return numerator/x
+
+#applies the calculation to each number in the range 
+ans3 = list(map(makeFraction, w))
+print(ans3)
+
+
+##### QUESTION 4 #####
+
+#### a 
+#makes a subtraction function to be used in map
+def subtract(a,b):
+    return a-b
+#uses the subtraction function on a and the reversal of a 
+ans4 = list(map(subtract, a, reversed(a)))
+print(ans4)
+
+#### b 
+#function that returns truth value of parity check  
+#returns True: even, False: off
+def isEven(number):
+    return number % 2 == 0
+
+#applies the parity check to a
+ans5 = list(map(isEven, a))
+print(ans5)
+       
+        
+##### QUESTION 5 #####
+
+#read in text 
+with open("lorem.txt") as file: 
+    data = file.read()
+
+### a The number of strings whose lengths are: 1-4, 4-7, and 8<
+
+#splits the string into individual words (and any attached punctutation)
+antony = data.split() 
+#counts length of each individual strihg
+stringyLengths = list(map(len, antony))
+
+#binning function that places number into 
+def binning(x):
+    if(x <= 4): return 1
+    elif(x > 4 and x <= 7): return 2 
+    else: return 3
+
+#bins the string lengths into the three categories 
+binStrings = list(map(binning, stringyLengths))
+#gets a count of each category 
+theCount = [binStrings.count(1),binStrings.count(2),binStrings.count(3)]
+print(theCount)
+
+
+### b The number of capitalized characters in the file 
+
+#keeps only the characters that are upper case 
+#then counts them 
+steve = list(filter(str.isupper, data))
+num = len(steve)
+print(num)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
